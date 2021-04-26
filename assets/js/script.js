@@ -13,6 +13,8 @@ for (i=0; i<workHour.length; i++) {
             workingHour.text(time)
     var textArea = $('<textarea>').addClass('description col-9')
     var saveBtn = $('<button>').addClass('saveBtn col-1')
+        var btnIcon = $('<i>').addClass('fas fa-save')
+        saveBtn.append(btnIcon)
     timeRow.append(workingHour, textArea, saveBtn)
     
         if (currentTime > workHour[i]) {
