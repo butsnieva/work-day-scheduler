@@ -3,7 +3,6 @@ $('#currentDay').text('Today is ' + moment().format('dddd, MMMM Do'))
 var tasks = {}
 var currentTime = parseInt(moment().format('h'))
 
-
 var workHour = [8,9,10,11,12,13,14,15,16]
 for (i=0; i<workHour.length; i++) {
     var timeRow = $('<div>').addClass('row time-block').attr('data-id', workHour[i])
@@ -36,3 +35,15 @@ $('.saveBtn').on('click', function() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
     //console.log(tasks)
 })
+
+
+function loadTasks(){
+    tasks = JSON.parse(localStorage.getItem("tasks"))
+    for (var i = 0; i < tasks.length; i++){
+        var taskTime = tasks[i].time;
+        var taskValue = tasks[i].value; 
+    $("[data-id=" + taskTime + "]").children("textarea").val(taskValue);
+    }
+}
+loadTasks()
+
