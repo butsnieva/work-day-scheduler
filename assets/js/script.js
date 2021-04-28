@@ -1,6 +1,5 @@
 $('#currentDay').text('Today is ' + moment().format('dddd, MMMM Do'))
 
-var tasks = {}
 var currentTime = parseInt(moment().format('h'))
 
 var workHour = [8,9,10,11,12,13,14,15,16]
@@ -24,10 +23,8 @@ for (i=0; i<workHour.length; i++) {
         } else if (currentTime < workHour[i]) {
             textArea.addClass('future')
         }
-
 }
 
-tasks = []
 $('.saveBtn').on('click', function() {
 
     var value = $(this).siblings('.description').val()
@@ -35,17 +32,20 @@ $('.saveBtn').on('click', function() {
     var task = {time: time, value: value}
     tasks.push(task)
     localStorage.setItem('tasks', JSON.stringify(tasks))
-    //console.log(tasks)
+    console.log(tasks)
 })
 
 
 function loadTasks(){
     tasks = JSON.parse(localStorage.getItem("tasks"))
+    if (!tasks) {
+        tasks = [] 
+    } else {
     for (var i = 0; i < tasks.length; i++){
         var taskTime = tasks[i].time;
         var taskValue = tasks[i].value; 
     $("[data-id=" + taskTime + "]").children("textarea").val(taskValue);
-    }
+    }}
 }
-loadTasks()
 
+loadTasks()
